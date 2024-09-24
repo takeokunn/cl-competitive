@@ -1,6 +1,6 @@
 * Cl-Competitive
 
 #+begin_src lisp
-  (asdf:load-asd "~/ghq/github.com/takeokunn/cl-competitive/cl-competitive.asd")
+  (asdf:load-asd "/Users/obara/ghq/github.com/takeokunn/cl-competitive/cl-competitive.asd")
   (asdf:test-system :cl-competitive)
 #+end_src
