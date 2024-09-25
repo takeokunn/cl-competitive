@@ -1,8 +1,11 @@
 (defpackage cl-competitive/main
   (:use :cl)
-  (:export #:main))
+  (:export #:main #:add))
 (in-package :cl-competitive/main)
 
 (defun main ()
-  (print "hello world")
+  "hello world"
   "hello world")
+
+(defun add (a b)
+  (+ a b))

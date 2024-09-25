@@ -1,6 +1,15 @@
 * Cl-Competitive
+** Local Setup
+
+shell:
+
+#+begin_src console
+  $ ln -snf (pwd) ~/.roswell/local-projects/takeokunn/cl-competitive
+  $ ros install fiveam
+#+end_src
+
+ros run:
 
 #+begin_src lisp
-  (asdf:load-asd "/Users/obara/ghq/github.com/takeokunn/cl-competitive/cl-competitive.asd")
   (asdf:test-system :cl-competitive)
 #+end_src
