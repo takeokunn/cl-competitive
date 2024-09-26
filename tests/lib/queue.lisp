@@ -5,7 +5,9 @@
 (def-suite lib-queue)
 (in-suite lib-queue)
 
-;;; integration test
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;         integration test          ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (test queue-integration
   ;; make queue
@@ -29,7 +31,9 @@
     (is (empty-p q))
     (is (string= (debug-print q) "Queue: NIL"))))
 
-;;; unit test
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;            unit test             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (test queue-get-element
   (let ((q (make-queue)))
@@ -69,6 +73,16 @@
 
   (let ((q (make-queue :elements '(10 20))))
     (is (string= (debug-print q) "Queue: (10 20)"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;            property based test             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; FIFO特性（順序性）
+;; enqueueしたリストが、dequeueした結果と一致するかどうか。
+;; 例: enqueue(a), enqueue(b), dequeue() → a, dequeue() → b
+
+;;; TBD
 
 ;;; run test
 
