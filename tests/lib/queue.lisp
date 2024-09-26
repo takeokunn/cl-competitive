@@ -17,16 +17,16 @@
     (enqueue q 30)
 
     ;; check
-    (is (eq (empty-p q) nil))
+    (is (not (empty-p q)))
     (is (string= (debug-print q) "Queue: (10 20 30)"))
 
     ;; dequeue
-    (is (eq (dequeue q) 10))
+    (is (= (dequeue q) 10))
     (is (= (dequeue q) 20))
     (is (= (dequeue q) 30))
 
     ;; check
-    (is (eq (not (empty-p q)) nil))
+    (is (empty-p q))
     (is (string= (debug-print q) "Queue: NIL"))))
 
 ;;; unit test
