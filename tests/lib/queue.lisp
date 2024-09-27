@@ -78,11 +78,51 @@
 ;            property based test             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setf *num-trials* 10000)
+
 ;;; FIFO特性（順序性）
 ;; enqueueしたリストが、dequeueした結果と一致するかどうか。
 ;; 例: enqueue(a), enqueue(b), dequeue() → a, dequeue() → b
 
-;;; TBD
+(test queue-fifo-property
+      (for-all ((elements (gen-list :length (gen-integer :min 1 :max 10))))
+               (let ((q (make-queue)))
+                 ;; すべての要素をエンキュー
+                 (dolist (e elements)
+                   (enqueue q e))
+
+                 ;; デキューした結果が元のリストと一致することを確認
+                 (is (equal elements
+                            (loop :for _ :from 1 :to (length elements)
+                                  collect (dequeue q)))))))
+
+;;; キューの長さの不変性
+;;; 空のキューにエンキューした後、キューのサイズが1増えていること。
+;;; デキューした後はキューのサイズが1減っていること。
+
+(test queue-length-invariant
+      (for-all ((elements (gen-list :length (gen-integer :min 1 :max 10))))
+               (let ((q (make-queue)))
+                 ;; すべての要素をエンキュー
+                 (dolist (e elements)
+                   (enqueue q e))
+
+                 ;; エンキュー後の長さを確認
+                 (is (= (length elements)
+                        (length (get-elements q))))
+
+                 ;; すべてデキューした後、キューが空であることを確認
+                 (loop :for _ :from 1 :to (length elements)
+                       :do (dequeue q))
+                 (is (empty-p q)))))
+
+;;; 空キュー操作の安全性
+;;; 空のキューに対してdequeue()した場合に、エラーが発生せずにnilまたは指定された値が返されるか。
+
+(test queue-empty-queue-dequeue
+      (for-all ()
+               (let ((q (make-queue)))
+                 (is (null (dequeue q))))))
 
 ;;; run test
 
