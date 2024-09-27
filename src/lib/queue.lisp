@@ -4,6 +4,7 @@
            #:get-elements
            #:enqueue
            #:dequeue
+           #:peek
            #:empty-p
            #:debug-print))
 (in-package :cl-competitive/lib/queue)
@@ -28,6 +29,9 @@
   (let ((first-element (first (elements q))))
     (setf (elements q) (rest (elements q)))
     first-element))
+
+(defmethod peek ((q queue))
+  (car (elements q)))
 
 (defmethod empty-p ((q queue))
   (null (elements q)))

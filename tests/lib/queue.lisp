@@ -53,12 +53,16 @@
 
 (test queue-unit-dequeue
   (let* ((q (make-queue :elements '(10 20))))
-    ;; bofore
+    ;; before
     (is (equal (get-elements q) '(10 20)))
 
     ;; after
     (is (equal (dequeue q) 10))
     (is (equal (get-elements q) '(20)))))
+
+(test queue-unit-dequeue
+  (let* ((q (make-queue :elements '(10 20))))
+    (is (equal (peek q) 10))))
 
 (test queue-empty-p
   (let ((q (make-queue)))
@@ -85,7 +89,7 @@
 ;; 例: enqueue(a), enqueue(b), dequeue() → a, dequeue() → b
 
 (test queue-fifo-property
-      (for-all ((elements (gen-list :length (gen-integer :min 1 :max 10))))
+      (for-all ((elements (gen-list)))
                (let ((q (make-queue)))
                  ;; すべての要素をenqueue
                  (dolist (e elements)
@@ -101,7 +105,7 @@
 ;;; dequeueした後はqueueのサイズが1減っていること。
 
 (test queue-length-invariant
-      (for-all ((elements (gen-list :length (gen-integer :min 1 :max 10))))
+      (for-all ((elements (gen-list)))
                (let ((q (make-queue)))
                  ;; すべての要素をenqueue
                  (dolist (e elements)
