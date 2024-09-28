@@ -1,12 +1,12 @@
 (defpackage cl-competitive/lib/queue
   (:use :cl)
   (:export #:make-queue
-           #:get-elements
-           #:enqueue
-           #:dequeue
-           #:peek
-           #:empty-p
-           #:debug-print))
+           #:queue-get-elements
+           #:queue-enqueue
+           #:queue-dequeue
+           #:queue-peek
+           #:queue-empty-p
+           #:queue-debug-print))
 (in-package :cl-competitive/lib/queue)
 
 (defclass queue ()
@@ -18,23 +18,23 @@
 (defun make-queue (&key (elements nil))
   (make-instance 'queue :elements elements))
 
-(defmethod get-elements ((q queue))
+(defmethod queue-get-elements ((q queue))
   (elements q))
 
-(defmethod enqueue ((q queue) element)
+(defmethod queue-enqueue ((q queue) element)
   (setf (elements q)
         (append (elements q) (list element))))
 
-(defmethod dequeue ((q queue))
+(defmethod queue-dequeue ((q queue))
   (let ((first-element (first (elements q))))
     (setf (elements q) (rest (elements q)))
     first-element))
 
-(defmethod peek ((q queue))
+(defmethod queue-peek ((q queue))
   (car (elements q)))
 
-(defmethod empty-p ((q queue))
+(defmethod queue-empty-p ((q queue))
   (null (elements q)))
 
-(defmethod debug-print ((q queue))
+(defmethod queue-debug-print ((q queue))
   (format nil "Queue: ~a" (elements q)))
