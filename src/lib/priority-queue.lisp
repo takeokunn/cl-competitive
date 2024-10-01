@@ -21,7 +21,7 @@
   (+ (* 2 index) 2))
 
 (defun swap (lst i j)
-  (let ((temp (nth i lst)))  ; temp-i と temp-j を一時変数に保存
+  (let ((temp (nth i lst)))
     (setf (nth i lst) (nth j lst))
     (setf (nth j lst) temp))
   lst)
@@ -41,7 +41,6 @@
 (defmethod heapify-up ((pq priority-queue) index)
   (let ((now-heap (heap pq))
         (parent (parent-index index)))
-
     (when (and (< 0 index)
                (<= (first (nth index now-heap))
                    (first (nth parent now-heap))))
@@ -78,17 +77,15 @@
       (heapify-down pq smallest))))
 
 (defmethod priority-queue-dequeue ((pq priority-queue))
-  (when (null (heap pq))
-    (return-from priority-queue-dequeue nil))
-
-  (let* ((old-heap (heap pq))
-         (root (first old-heap))
-         (new-heap (rest old-heap)))
-    (setf (heap pq)
-          (append (last new-heap)
-                  (butlast new-heap)))
-    (heapify-down pq 0)
-    root))
+  (when (heap pq)
+    (let* ((old-heap (heap pq))
+           (root (first old-heap))
+           (new-heap (rest old-heap)))
+      (setf (heap pq)
+            (append (last new-heap)
+                    (butlast new-heap)))
+      (heapify-down pq 0)
+      root)))
 
 (defmethod priority-queue-empty-p ((pq priority-queue))
   (null (heap pq)))
