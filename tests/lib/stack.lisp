@@ -131,8 +131,8 @@
             :do (setf index (1- index)))
       (is (stack-empty-p s)))))
 
-;;; 空queue操作の安全性
-;;; 空のqueueに対してdequeue()した場合に、エラーが発生せずにnilまたは指定された値が返されるか。
+;;; 空stack操作の安全性
+;;; 空のstackに対してpopした場合に、エラーが発生せずにnilまたは指定された値が返されるか。
 
 (test property-stack-empty-pop
   (for-all ()

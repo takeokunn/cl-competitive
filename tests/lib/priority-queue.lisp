@@ -38,6 +38,33 @@
 ;;            integration test              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(test integration-priority-queue
+  ;; make priority-queue
+  (let ((pq (make-priority-queue)))
+    ;; enqueue
+    (priority-queue-enqueue pq 3 "hello")
+    (priority-queue-enqueue pq 1 "hello")
+    (priority-queue-enqueue pq 4 "hello")
+    (priority-queue-enqueue pq 5 "hello")
+    (priority-queue-enqueue pq 2 "hello")
+
+    ;; check
+    (is (= 5 (length (priority-queue-get-heap pq))))
+    (is (valid-min-heap-p (priority-queue-get-heap pq)))
+    (priority-queue-debug-print pq)
+
+    ;; dequeue
+    (is (equal '(1 . "hello") (priority-queue-dequeue pq)))
+    (is (equal '(2 . "hello") (priority-queue-dequeue pq)))
+    (is (equal '(3 . "hello") (priority-queue-dequeue pq)))
+    (is (equal '(4 . "hello") (priority-queue-dequeue pq)))
+    (is (equal '(5 . "hello") (priority-queue-dequeue pq)))
+
+    ;; check
+    (is (zerop (length (priority-queue-get-heap pq))))
+    (is (priority-queue-empty-p pq))
+    (is (null (priority-queue-get-heap pq)))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               unit test                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -72,6 +99,14 @@
 
     (is (= 10 (length (priority-queue-get-heap pq))))
     (is (valid-min-heap-p (priority-queue-get-heap pq)))))
+
+(test unit-priority-queue-dequeue
+  (let ((pq (make-priority-queue :heap '((1 . "a") (2 . "b") (3 . "c")))))
+    (is (valid-min-heap-p (priority-queue-get-heap pq)))
+    (is (equal '(1 . "a") (priority-queue-dequeue pq)))
+    (is (equal '(2 . "b") (priority-queue-dequeue pq)))
+    (is (equal '(3 . "c") (priority-queue-dequeue pq)))
+    (is (zerop (length (priority-queue-get-heap pq))))))
 
 (test unit-priority-queue-debug-print
   (let ((pq (make-priority-queue)))
