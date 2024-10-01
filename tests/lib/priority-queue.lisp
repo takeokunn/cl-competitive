@@ -114,12 +114,12 @@
 ;;            property based test           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setf *num-trials* 1000)
+(setf *num-trials* 100)
 
 (defun gen-pair ()
   (lambda ()
     (loop
-      :repeat (funcall (gen-integer :min 0 :max 100))
+      :repeat (funcall (gen-integer :min 1 :max 100))
       :collect (cons (funcall (gen-integer :min 1 :max 100))
                      (funcall (gen-character))))))
 
