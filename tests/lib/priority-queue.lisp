@@ -45,7 +45,6 @@
     ;; check
     (is (= 5 (length (priority-queue-get-heap pq))))
     (is (valid-min-heap-p (priority-queue-get-heap pq)))
-    (priority-queue-debug-print pq)
 
     ;; dequeue
     (is (equal '(1 . "hello 1") (priority-queue-dequeue pq)))
@@ -142,6 +141,27 @@
               :for child = index
               :do (is (<= (first (nth parent heap))
                           (first (nth child heap)))))))))
+
+;; enqueue/dequeue の整合性テスト
+
+(test property-priority-queue-enqueue-dequeue
+  (for-all ((lst (gen-pair)))
+    (let ((pq (make-priority-queue)))
+      (loop :for (priority . value) :in lst
+            :do (priority-queue-enqueue pq priority value))
+
+      ;; min-heapになっているかどうか
+      (is (valid-min-heap-p (priority-queue-get-heap pq)))
+
+      ;; 根には常に最小の優先度がある
+      (let ((heap (priority-queue-get-heap pq)))
+        (loop :repeat (floor (1- (length lst)) 2)
+              :for (priority . value) = (priority-queue-dequeue pq)
+              :for now-heap = (priority-queue-get-heap pq)
+              :do (is (or (null now-heap)
+                          (every (lambda (el)
+                                   (<= priority (first el)))
+                                 now-heap))))))))
 
 ;;; 空priority-queue操作の安全性
 ;;; 空のpriority-queueに対してdequeue()した場合に、エラーが発生せずにnilまたは指定された値が返されるか。
