@@ -42,11 +42,11 @@
   ;; make priority-queue
   (let ((pq (make-priority-queue)))
     ;; enqueue
-    (priority-queue-enqueue pq 3 "hello")
-    (priority-queue-enqueue pq 1 "hello")
-    (priority-queue-enqueue pq 4 "hello")
-    (priority-queue-enqueue pq 5 "hello")
-    (priority-queue-enqueue pq 2 "hello")
+    (priority-queue-enqueue pq 3 "hello 3")
+    (priority-queue-enqueue pq 1 "hello 1")
+    (priority-queue-enqueue pq 4 "hello 4")
+    (priority-queue-enqueue pq 5 "hello 5")
+    (priority-queue-enqueue pq 2 "hello 2")
 
     ;; check
     (is (= 5 (length (priority-queue-get-heap pq))))
@@ -54,11 +54,11 @@
     (priority-queue-debug-print pq)
 
     ;; dequeue
-    (is (equal '(1 . "hello") (priority-queue-dequeue pq)))
-    (is (equal '(2 . "hello") (priority-queue-dequeue pq)))
-    (is (equal '(3 . "hello") (priority-queue-dequeue pq)))
-    (is (equal '(4 . "hello") (priority-queue-dequeue pq)))
-    (is (equal '(5 . "hello") (priority-queue-dequeue pq)))
+    (is (equal '(1 . "hello 1") (priority-queue-dequeue pq)))
+    (is (equal '(2 . "hello 2") (priority-queue-dequeue pq)))
+    (is (equal '(3 . "hello 3") (priority-queue-dequeue pq)))
+    (is (equal '(4 . "hello 4") (priority-queue-dequeue pq)))
+    (is (equal '(5 . "hello 5") (priority-queue-dequeue pq)))
 
     ;; check
     (is (zerop (length (priority-queue-get-heap pq))))
@@ -122,6 +122,40 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setf *num-trials* 1000)
+
+(defun gen-pair ()
+  (lambda ()
+    (loop
+      :repeat (funcall (gen-integer :min 0 :max 100))
+      :collect (cons (funcall (gen-integer :min 1 :max 100))
+                     (funcall (gen-character))))))
+
+;;; Dequeue後の順序検証
+
+(test property-priority-queue-dequeue-order
+  (for-all ((lst (gen-pair)))
+    (let ((pq (make-priority-queue)))
+      (loop :for (priority . value) :in lst
+            :do (priority-queue-enqueue pq priority value))
+
+      ;; min-heapになっているかどうか
+      (is (valid-min-heap-p (priority-queue-get-heap pq)))
+
+      ;; 根には常に最小の優先度がある
+      (let ((heap (priority-queue-get-heap pq)))
+        (loop :for index :from 1 :below (length heap)
+              :for parent = (parent-index index)
+              :for child = index
+              :do (is (<= (first (nth parent heap))
+                          (first (nth child heap)))))))))
+
+;;; 空priority-queue操作の安全性
+;;; 空のpriority-queueに対してdequeue()した場合に、エラーが発生せずにnilまたは指定された値が返されるか。
+
+(test property-priority-queue-empty-dequeue
+  (for-all ()
+    (let ((pq (make-priority-queue)))
+      (is (null (priority-queue-dequeue pq))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                  run test                ;;

@@ -18,19 +18,17 @@
   (+ 2 (* 2 index)))
 
 (defun swap (lst i j)
-  (let* ((temp-i (nth i lst))
-         (temp-j (nth j lst)))
-    (setf (nth i lst) temp-j)
-    (setf (nth j lst) temp-i))
-  lst)
+  (let ((temp (elt lst i)))
+    (setf (elt lst i) (elt lst j))
+    (setf (elt lst j) temp)))
 
 (defclass priority-queue ()
   ((heap
-    :initform '()
+    :initform nil
     :initarg :heap
     :accessor heap)))
 
-(defun make-priority-queue (&key (heap '()))
+(defun make-priority-queue (&key (heap nil))
   (make-instance 'priority-queue :heap heap))
 
 (defmethod priority-queue-get-heap ((pq priority-queue))
