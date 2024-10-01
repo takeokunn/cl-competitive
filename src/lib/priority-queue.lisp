@@ -1,6 +1,9 @@
 (defpackage cl-competitive/lib/priority-queue
   (:use :cl)
-  (:export #:make-priority-queue
+  (:export #:parent-index
+           #:left-index
+           #:right-index
+           #:make-priority-queue
            #:priority-queue-get-heap
            #:priority-queue-enqueue
            #:priority-queue-dequeue
@@ -18,9 +21,11 @@
   (+ 2 (* 2 index)))
 
 (defun swap (lst i j)
-  (let ((temp (elt lst i)))
-    (setf (elt lst i) (elt lst j))
-    (setf (elt lst j) temp)))
+  (let* ((temp-i (nth i lst))
+         (temp-j (nth j lst)))
+    (setf (nth i lst) temp-j)
+    (setf (nth j lst) temp-i))
+  lst)
 
 (defclass priority-queue ()
   ((heap

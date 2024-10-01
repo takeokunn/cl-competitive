@@ -9,12 +9,6 @@
 ;;                utility                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun left-index (index)
-  (+ 1 (* 2 index)))
-
-(defun right-index (index)
-  (+ 2 (* 2 index)))
-
 (defun valid-min-heap-p (heap)
   (loop
     :with heap-length = (length heap)
