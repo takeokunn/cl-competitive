@@ -114,8 +114,6 @@
 ;;            property based test           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setf *num-trials* 100)
-
 (defun gen-pair ()
   (lambda ()
     (loop

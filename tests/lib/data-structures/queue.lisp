@@ -81,8 +81,6 @@
 ;;            property based test           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setf *num-trials* 1000)
-
 ;;; FIFO特性（順序性）
 ;;; enqueueしたリストが、dequeueした結果と一致するかどうか。
 ;;; 例: enqueue(a), enqueue(b), dequeue() → a, dequeue() → b

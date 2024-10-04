@@ -88,8 +88,6 @@
 ;;            property based test           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setf *num-trials* 1000)
-
 ;;; LIFO特性（順序性）
 ;; pushしたリストが、popした結果と一致するかどうか。
 ;; 例: push(a), push(b), pop() → b, pop() → a
