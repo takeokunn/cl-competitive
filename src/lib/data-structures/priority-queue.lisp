@@ -1,4 +1,4 @@
-(defpackage cl-competitive/lib/priority-queue
+(defpackage cl-competitive/lib/data-structures/priority-queue
   (:use :cl)
   (:export #:parent-index
            #:left-index
@@ -9,7 +9,7 @@
            #:priority-queue-dequeue
            #:priority-queue-empty-p
            #:priority-queue-debug-print))
-(in-package :cl-competitive/lib/priority-queue)
+(in-package :cl-competitive/lib/data-structures/priority-queue)
 
 (defun parent-index (index)
   (floor (/ (1- index) 2)))

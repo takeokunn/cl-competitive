@@ -1,6 +1,6 @@
-(defpackage cl-competitive/tests/lib/stack
-  (:use :cl :fiveam :cl-competitive/lib/stack))
-(in-package :cl-competitive/tests/lib/stack)
+(defpackage cl-competitive/tests/lib/data-structures/stack
+  (:use :cl :fiveam :cl-competitive/lib/data-structures/stack))
+(in-package :cl-competitive/tests/lib/data-structures/stack)
 
 (def-suite lib-stack)
 (in-suite lib-stack)

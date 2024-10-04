@@ -1,6 +1,6 @@
-(defpackage cl-competitive/tests/lib/priority-queue
-  (:use :cl :fiveam :cl-competitive/lib/priority-queue))
-(in-package :cl-competitive/tests/lib/priority-queue)
+(defpackage cl-competitive/tests/lib/data-structures/priority-queue
+  (:use :cl :fiveam :cl-competitive/lib/data-structures/priority-queue))
+(in-package :cl-competitive/tests/lib/data-structures/priority-queue)
 
 (def-suite lib-priority-queue)
 (in-suite lib-priority-queue)

@@ -1,4 +1,4 @@
-(defpackage cl-competitive/lib/stack
+(defpackage cl-competitive/lib/data-structures/stack
   (:use :cl)
   (:export #:make-stack
            #:stack-get-elements
@@ -7,7 +7,7 @@
            #:stack-peek
            #:stack-empty-p
            #:stack-debug-print))
-(in-package :cl-competitive/lib/stack)
+(in-package :cl-competitive/lib/data-structures/stack)
 
 (defclass stack ()
   ((elements

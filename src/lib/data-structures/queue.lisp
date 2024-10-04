@@ -1,4 +1,4 @@
-(defpackage cl-competitive/lib/queue
+(defpackage cl-competitive/lib/data-structures/queue
   (:use :cl)
   (:export #:make-queue
            #:queue-get-elements
@@ -7,7 +7,7 @@
            #:queue-peek
            #:queue-empty-p
            #:queue-debug-print))
-(in-package :cl-competitive/lib/queue)
+(in-package :cl-competitive/lib/data-structures/queue)
 
 (defclass queue ()
   ((elements
