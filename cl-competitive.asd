@@ -7,7 +7,8 @@
 
 (asdf:defsystem :cl-competitive/tests
     :depends-on (:cl-competitive :fiveam)
-    :components ((:file "tests/lib/data-structures/matrix")
+    :components ((:file "tests/lib/helper/generator")
+                 (:file "tests/lib/data-structures/matrix")
                  (:file "tests/lib/data-structures/queue")
                  (:file "tests/lib/data-structures/stack")
                  (:file "tests/lib/data-structures/priority-queue"))

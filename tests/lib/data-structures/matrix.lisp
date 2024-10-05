@@ -121,9 +121,16 @@
 
 (test unit-matrix-power-success
   (let ((mi (make-matrix-identity :size 2)))
-    (is (equal (matrix-power mi 10)
-               '((1 0)
-                 (0 1))))))
+    (is (equalp (matrix-data (matrix-power mi 10))
+                '((1 0)
+                  (0 1))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;            property based test           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(test property-matrix-add
+      )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                  run test                ;;

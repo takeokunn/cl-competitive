@@ -1,3 +1,5 @@
+#+STARTUP: content
+#+STARTUP: fold
 * Cl-Competitive
 ** Local Setup
 

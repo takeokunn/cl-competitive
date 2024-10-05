@@ -1,5 +1,8 @@
 (defpackage cl-competitive/tests/lib/data-structures/priority-queue
-  (:use :cl :fiveam :cl-competitive/lib/data-structures/priority-queue))
+  (:use :cl
+        :fiveam
+        :cl-competitive/lib/data-structures/priority-queue
+        :cl-competitive/tests/helper/generator))
 (in-package :cl-competitive/tests/lib/data-structures/priority-queue)
 
 (def-suite lib-priority-queue)
@@ -113,13 +116,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            property based test           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun gen-pair ()
-  (lambda ()
-    (loop
-      :repeat (funcall (gen-integer :min 1 :max 100))
-      :collect (cons (funcall (gen-integer :min 1 :max 100))
-                     (funcall (gen-character))))))
 
 ;;; Dequeue後の順序検証
 
