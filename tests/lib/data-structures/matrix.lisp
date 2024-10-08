@@ -162,7 +162,6 @@
     (let* ((m (make-matrix :rows 2 :cols 2 :data data)))
       (is (matrix-zero-p (matrix-sub m m)))))
 
-
   ;; A - B = A + (-B)
   (for-all ((a (gen-matrix))
             (b (gen-matrix)))
@@ -208,8 +207,32 @@
                    (matrix-add (matrix-multiple a-matrix b-matrix)
                                (matrix-multiple a-matrix c-matrix))))))))
 
+(test property-matrix-power
+  ;; I^n = I
+  (for-all ((n (gen-integer :min 1 :max 10))
+            (size (gen-integer :min 1 :max 10)))
+    (let* ((m-i (make-matrix-identity :size size)))
+      (is (equalp (matrix-get-data m-i)
+                  (matrix-get-data (matrix-power m-i n))))))
+
+  ;; A^1 = A
+  (for-all ((m (gen-matrix)))
+    (let* ((m (make-matrix :rows 2 :cols 2 :data m)))
+      (is (equalp (matrix-get-data m)
+                  (matrix-get-data (matrix-power m 1))))))
+
+  ;; A^x * A^y = A^(x+y)
+  (for-all ((m (gen-matrix))
+            (x (gen-integer :min 1 :max 10))
+            (y (gen-integer :min 1 :max 10)))
+    (let* ((m (make-matrix :rows 2 :cols 2 :data m)))
+      (is (equalp
+           (matrix-get-data (matrix-multiple (matrix-power m x)
+                                             (matrix-power m y)))
+           (matrix-get-data (matrix-power m (+ x y))))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                  run test                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(run! 'lib-matrix)
+p(run! 'lib-matrix)
