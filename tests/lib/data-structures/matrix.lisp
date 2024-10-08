@@ -1,5 +1,5 @@
 (defpackage cl-competitive/tests/lib/data-structures/matrix
-  (:use :cl :fiveam :cl-competitive/lib/data-structures/matrix))
+  (:use :cl :fiveam :cl-competitive/lib/data-structures/matrix :cl-competitive/tests/helper/generator))
 (in-package :cl-competitive/tests/lib/data-structures/matrix)
 
 (def-suite lib-matrix)
@@ -71,14 +71,23 @@
 
 (test unit-make-matrix-identity-success
   (is (equalp (matrix-get-data (make-matrix-identity :size 1))
-             '((1))))
+              '((1))))
   (is (equalp (matrix-get-data (make-matrix-identity :size 2))
-             '((1 0)
-               (0 1))))
+              '((1 0)
+                (0 1))))
   (is (equalp (matrix-get-data (make-matrix-identity :size 3))
-             '((1 0 0)
-               (0 1 0)
-               (0 0 1)))))
+              '((1 0 0)
+                (0 1 0)
+                (0 0 1)))))
+
+(test unit-matrix-zero-p
+  (let ((m (make-matrix :rows 2 :cols 2 :data '((0 0) (0 0)))))
+    (is (matrix-zero-p m))))
+
+(test unit-matrix-negate
+  (let ((m (make-matrix :rows 2 :cols 2 :data '((1 2) (3 4)))))
+    (is (equalp (matrix-negate m)
+                '((-1 -2) (-3 -4))))))
 
 (test unit-matrix-add-success
   (let ((m1 (make-matrix :rows 2 :cols 2 :data '((1 2) (3 4))))
@@ -121,7 +130,7 @@
 
 (test unit-matrix-power-success
   (let ((mi (make-matrix-identity :size 2)))
-    (is (equalp (matrix-data (matrix-power mi 10))
+    (is (equalp (matrix-get-data (matrix-power mi 10))
                 '((1 0)
                   (0 1))))))
 
@@ -130,7 +139,74 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (test property-matrix-add
-      )
+  ;; 交換法則
+  (for-all ((a (gen-matrix))
+            (b (gen-matrix)))
+    (let ((a-matrix (make-matrix :rows 2 :cols 2 :data a))
+          (b-matrix (make-matrix :rows 2 :cols 2 :data b)))
+      (is (equalp (matrix-get-data (matrix-add a-matrix b-matrix))
+                  (matrix-get-data (matrix-add b-matrix a-matrix))))))
+  ;; 結合法則
+  (for-all ((a (gen-matrix))
+            (b (gen-matrix))
+            (c (gen-matrix)))
+    (let ((a-matrix (make-matrix :rows 2 :cols 2 :data a))
+          (b-matrix (make-matrix :rows 2 :cols 2 :data b))
+          (c-matrix (make-matrix :rows 2 :cols 2 :data c)))
+      (is (equalp (matrix-get-data (matrix-add (matrix-add a-matrix b-matrix) c-matrix))
+                  (matrix-get-data (matrix-add a-matrix (matrix-add b-matrix c-matrix))))))))
+
+(test property-matrix-sub
+  ;; A - A = 0
+  (for-all ((data (gen-matrix)))
+    (let* ((m (make-matrix :rows 2 :cols 2 :data data)))
+      (is (matrix-zero-p (matrix-sub m m)))))
+
+
+  ;; A - B = A + (-B)
+  (for-all ((a (gen-matrix))
+            (b (gen-matrix)))
+    (let* ((a-matrix (make-matrix :rows 2 :cols 2 :data a))
+           (b-matrix (make-matrix :rows 2 :cols 2 :data b))
+           (b-negate-matrix (make-matrix :rows 2 :cols 2 :data (matrix-negate b-matrix))))
+      (is (equalp (matrix-get-data (matrix-sub a-matrix b-matrix))
+                  (matrix-get-data (matrix-add a-matrix b-negate-matrix)))))))
+
+(test property-matrix-multiple
+  ;; 単位行列 A * I = A
+  (for-all ((data (gen-matrix)))
+    (let* ((m (make-matrix :rows 2 :cols 2 :data data))
+           (i (make-matrix-identity :size 2)))
+      (is (equalp (matrix-get-data (matrix-multiple m i))
+                  (matrix-get-data m)))))
+
+  ;; 結合法則 A * (B * C) = (A * B) * C
+  (for-all ((a (gen-matrix))
+            (b (gen-matrix))
+            (c (gen-matrix)))
+    (let ((a-matrix (make-matrix :rows 2 :cols 2 :data a))
+          (b-matrix (make-matrix :rows 2 :cols 2 :data b))
+          (c-matrix (make-matrix :rows 2 :cols 2 :data c)))
+      (is (equalp (matrix-get-data
+                   (matrix-multiple (matrix-multiple a-matrix b-matrix)
+                                    c-matrix))
+                  (matrix-get-data
+                   (matrix-multiple a-matrix
+                                    (matrix-multiple b-matrix c-matrix)))))))
+
+  ;; 分配法則 A * (B + C) = A * B + A * C
+  (for-all ((a (gen-matrix))
+            (b (gen-matrix))
+            (c (gen-matrix)))
+    (let ((a-matrix (make-matrix :rows 2 :cols 2 :data a))
+          (b-matrix (make-matrix :rows 2 :cols 2 :data b))
+          (c-matrix (make-matrix :rows 2 :cols 2 :data c)))
+      (is (equalp (matrix-get-data
+                   (matrix-multiple a-matrix
+                                    (matrix-add b-matrix c-matrix)))
+                  (matrix-get-data
+                   (matrix-add (matrix-multiple a-matrix b-matrix)
+                               (matrix-multiple a-matrix c-matrix))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                  run test                ;;

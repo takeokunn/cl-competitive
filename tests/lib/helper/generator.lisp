@@ -1,6 +1,6 @@
 (defpackage cl-competitive/tests/helper/generator
   (:use :cl :fiveam)
-  (:export #:gen-pair))
+  (:export #:gen-pair #:gen-matrix))
 (in-package :cl-competitive/tests/helper/generator)
 
 (defun gen-pair ()
@@ -15,4 +15,4 @@
     (loop :for i :from 1 :to rows
           :collect
           (loop :for j :from 1 :to cols
-                :collect (gen-integer)))))
+                :collect (funcall (gen-integer))))))

@@ -5,6 +5,8 @@
            #:matrix-get-data
            #:matrix-get-rows
            #:matrix-get-cols
+           #:matrix-zero-p
+           #:matrix-negate
            #:matrix
            #:matrix-add
            #:matrix-sub
@@ -52,6 +54,16 @@
 
 (defmethod matrix-get-cols ((m matrix))
   (matrix-cols m))
+
+(defmethod matrix-zero-p ((m matrix))
+  (every #'(lambda (row)
+             (every #'zerop row))
+         (matrix-data m)))
+
+(defmethod matrix-negate ((m matrix))
+  (mapcar #'(lambda (row)
+              (mapcar #'(lambda (x) (- x)) row))
+          (matrix-data m)))
 
 (defmethod matrix-add ((m1 matrix) (m2 matrix))
   (let ((r1 (matrix-rows m1))
