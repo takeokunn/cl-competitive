@@ -31,9 +31,9 @@
         n
         (+ (fib (- n 1))
            (fib (- n 2)))))
+
   (is (functionp #'fib))
 
-  ;; Property based testing
   (for-all ((n (gen-integer :min 3 :max 100)))
     (is (= (fib n)
            (+ (fib (- n 1))
