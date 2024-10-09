@@ -40,19 +40,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (test property-fib
-  ;; fib-memo
+  ;; for fib-memo
   (for-all ((n (gen-integer :min 3 :max 30)))
     (is (equalp (fib-memo n)
                 (+ (fib-memo (- n 1))
                    (fib-memo (- n 2))))))
 
-  ;; fib-loop
+  ;; for fib-loop
   (for-all ((n (gen-integer :min 3 :max 30)))
     (is (equalp (fib-loop n)
                 (+ (fib-loop (- n 1))
                    (fib-loop (- n 2))))))
 
-  ;; fib-matrix
+  ;; for fib-matrix
   (for-all ((n (gen-integer :min 3 :max 30)))
     (is (equalp (fib-matrix n)
                 (+ (fib-matrix (- n 1))
