@@ -1,5 +1,7 @@
 (asdf:defsystem :cl-competitive
-    :components ((:file "src/lib/data-structures/matrix")
+    :components ((:file "src/helper/memoize")
+                 (:file "src/lib/algorithm/fibonacci")
+                 (:file "src/lib/data-structures/matrix")
                  (:file "src/lib/data-structures/queue")
                  (:file "src/lib/data-structures/stack")
                  (:file "src/lib/data-structures/priority-queue"))
@@ -7,7 +9,9 @@
 
 (asdf:defsystem :cl-competitive/tests
     :depends-on (:cl-competitive :fiveam)
-    :components ((:file "tests/lib/helper/generator")
+    :components ((:file "tests/generator")
+                 (:file "tests/helper/memoize")
+                 (:file "tests/lib/algorithm/fibonacci")
                  (:file "tests/lib/data-structures/matrix")
                  (:file "tests/lib/data-structures/queue")
                  (:file "tests/lib/data-structures/stack")

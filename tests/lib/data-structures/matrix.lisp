@@ -1,5 +1,8 @@
 (defpackage cl-competitive/tests/lib/data-structures/matrix
-  (:use :cl :fiveam :cl-competitive/lib/data-structures/matrix :cl-competitive/tests/helper/generator))
+  (:use :cl
+        :fiveam
+        :cl-competitive/tests/generator
+        :cl-competitive/lib/data-structures/matrix))
 (in-package :cl-competitive/tests/lib/data-structures/matrix)
 
 (def-suite lib-matrix)
@@ -235,4 +238,4 @@
 ;;                  run test                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-p(run! 'lib-matrix)
+(run! 'lib-matrix)

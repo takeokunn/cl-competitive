@@ -1,7 +1,7 @@
-(defpackage cl-competitive/tests/helper/generator
+(defpackage cl-competitive/tests/generator
   (:use :cl :fiveam)
   (:export #:gen-pair #:gen-matrix))
-(in-package :cl-competitive/tests/helper/generator)
+(in-package :cl-competitive/tests/generator)
 
 (defun gen-pair ()
   (lambda ()

@@ -1,5 +1,7 @@
 (defpackage cl-competitive/tests/lib/data-structures/queue
-  (:use :cl :fiveam :cl-competitive/lib/data-structures/queue))
+  (:use :cl
+        :fiveam
+        :cl-competitive/lib/data-structures/queue))
 (in-package :cl-competitive/tests/lib/data-structures/queue)
 
 (def-suite lib-queue)
