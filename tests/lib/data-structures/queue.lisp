@@ -4,8 +4,8 @@
         :cl-competitive/lib/data-structures/queue))
 (in-package :cl-competitive/tests/lib/data-structures/queue)
 
-(def-suite lib-queue)
-(in-suite lib-queue)
+(def-suite lib-data-structures-queue)
+(in-suite lib-data-structures-queue)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            integration test              ;;
@@ -136,4 +136,4 @@
 ;;                  run test                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(run! 'lib-queue)
+(run! 'lib-data-structures-queue)

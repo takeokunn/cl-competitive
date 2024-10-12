@@ -1,6 +1,6 @@
 (defpackage cl-competitive/tests/helper/memoize
   (:use :cl
-   :fiveam
+        :fiveam
         :cl-competitive/helper/memoize))
 (in-package :cl-competitive/tests/helper/memoize)
 

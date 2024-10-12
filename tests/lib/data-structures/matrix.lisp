@@ -1,12 +1,12 @@
 (defpackage cl-competitive/tests/lib/data-structures/matrix
   (:use :cl
         :fiveam
-        :cl-competitive/tests/generator
+        :cl-competitive/tests/utils
         :cl-competitive/lib/data-structures/matrix))
 (in-package :cl-competitive/tests/lib/data-structures/matrix)
 
-(def-suite lib-matrix)
-(in-suite lib-matrix)
+(def-suite lib-data-structures-matrix)
+(in-suite lib-data-structures-matrix)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            integration test              ;;
@@ -238,4 +238,4 @@
 ;;                  run test                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(run! 'lib-matrix)
+(run! 'lib-data-structures-matrix)

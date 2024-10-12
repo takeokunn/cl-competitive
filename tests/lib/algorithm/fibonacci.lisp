@@ -1,39 +1,36 @@
 (defpackage cl-competitive/tests/lib/algorithm/fibonacci
   (:use :cl
         :fiveam
+        :cl-competitive/tests/utils
         :cl-competitive/lib/algorithm/fibonacci))
 (in-package :cl-competitive/tests/lib/algorithm/fibonacci)
 
-(def-suite lib-fibonacci)
-(in-suite lib-fibonacci)
+(def-suite lib-algorithm-fibonacci)
+(in-suite lib-algorithm-fibonacci)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                unit test                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (test fib
-  (is (= 1 (fib 1)))
-  (is (= 1 (fib 2)))
-  (is (= 5 (fib 5)))
-  (is (= 55 (fib 10))))
+  (with-data-provider ((arg expected)
+                       '((1 1) (2 1) (5 5) (10 55)))
+    (is (= expected (fib arg)))))
 
 (test fib-memo
-  (is (= 1 (fib-memo 1)))
-  (is (= 1 (fib-memo 2)))
-  (is (= 5 (fib-memo 5)))
-  (is (= 55 (fib-memo 10))))
+  (with-data-provider ((arg expected)
+                       '((1 1) (2 1) (5 5) (10 55)))
+    (is (= expected (fib-memo arg)))))
 
 (test fib-loop
-  (is (= 1 (fib-loop 1)))
-  (is (= 1 (fib-loop 2)))
-  (is (= 5 (fib-loop 5)))
-  (is (= 55 (fib-loop 10))))
+  (with-data-provider ((arg expected)
+                       '((1 1) (2 1) (5 5) (10 55)))
+    (is (= expected (fib-loop arg)))))
 
 (test fib-matrix
-  (is (= 1 (fib-matrix 1)))
-  (is (= 1 (fib-matrix 2)))
-  (is (= 5 (fib-matrix 5)))
-  (is (= 55 (fib-matrix 10))))
+  (with-data-provider ((arg expected)
+                       '((1 1) (2 1) (5 5) (10 55)))
+    (is (= expected (fib-matrix arg)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            property based test           ;;
@@ -62,4 +59,4 @@
 ;;                  run test                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(run! 'lib-fibonacci)
+(run! 'lib-algorithm-fibonacci)

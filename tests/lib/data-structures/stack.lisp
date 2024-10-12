@@ -4,8 +4,8 @@
         :cl-competitive/lib/data-structures/stack))
 (in-package :cl-competitive/tests/lib/data-structures/stack)
 
-(def-suite lib-stack)
-(in-suite lib-stack)
+(def-suite lib-data-structures-stack)
+(in-suite lib-data-structures-stack)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            integration test              ;;
@@ -143,4 +143,4 @@
 ;;                  run test                :;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(run! 'lib-stack)
+(run! 'lib-data-structures-stack)

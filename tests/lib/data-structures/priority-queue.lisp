@@ -1,12 +1,12 @@
 (defpackage cl-competitive/tests/lib/data-structures/priority-queue
   (:use :cl
         :fiveam
-        :cl-competitive/tests/generator
+        :cl-competitive/tests/utils
         :cl-competitive/lib/data-structures/priority-queue))
 (in-package :cl-competitive/tests/lib/data-structures/priority-queue)
 
-(def-suite lib-priority-queue)
-(in-suite lib-priority-queue)
+(def-suite lib-data-structures-priority-queue)
+(in-suite lib-data-structures-priority-queue)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                utility                   ;;
@@ -168,4 +168,4 @@
 ;;                  run test                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(run! 'lib-priority-queue)
+(run! 'lib-data-structures-priority-queue)

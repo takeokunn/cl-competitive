@@ -10,12 +10,13 @@
                  (:file "src/lib/data-structures/priority-queue")
 
                  ;; algorithm
-                 (:file "src/lib/algorithm/fibonacci"))
+                 (:file "src/lib/algorithm/fibonacci")
+                 (:file "src/lib/algorithm/tribonacci"))
     :in-order-to ((test-op (test-op :cl-competitive/tests))))
 
 (asdf:defsystem :cl-competitive/tests
     :depends-on (:cl-competitive :fiveam)
-    :components ((:file "tests/generator")
+    :components ((:file "tests/utils")
 
                  ;; helper
                  (:file "tests/helper/memoize")
@@ -27,5 +28,6 @@
                  (:file "tests/lib/data-structures/priority-queue")
 
                  ;; algorithm
-                 (:file "tests/lib/algorithm/fibonacci"))
+                 (:file "tests/lib/algorithm/fibonacci")
+                 (:file "tests/lib/algorithm/tribonacci"))
     :perform (test-op (o c) (symbol-call :fiveam '#:run! :foobar)))
