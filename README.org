@@ -1,17 +1,7 @@
 #+STARTUP: content
 #+STARTUP: fold
-* Cl-Competitive
-** Local Setup
-
-shell:
-
-#+begin_src console
-  $ ln -snf (pwd) ~/.roswell/local-projects/takeokunn/cl-competitive
-  $ ros install fiveam
-#+end_src
-
-ros run:
-
-#+begin_src lisp
-  (asdf:test-system :cl-competitive)
+* cl-competitive
+** test
+#+begin_src shell
+  $ nix run .#test
 #+end_src

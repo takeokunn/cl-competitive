@@ -11,15 +11,16 @@
       perSystem = { pkgs, ... }:
         let
           pname = "cl-competitive";
-          lispLib = pkgs.sbcl.buildASDFSystem {
+          myLib = pkgs.sbcl.buildASDFSystem {
             inherit pname;
             version = "0.0.1";
             src = ./.;
             systems = [ pname "${pname}/tests" ];
             lispLibs = with pkgs.sbcl.pkgs; [ fiveam ];
           };
-          lisp = pkgs.sbcl.withPackages (ps: [ lispLib ]);
+          lisp = pkgs.sbcl.withPackages (ps: [ myLib ]);
         in {
+          devShells.default = pkgs.mkShell { packages = with pkgs; [ lisp ]; };
           apps = {
             test = {
               type = "app";
