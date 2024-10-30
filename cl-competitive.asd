@@ -1,6 +1,7 @@
 (asdf:defsystem :cl-competitive
     :components (
                  ;; helper
+                 (:file "src/helper/anaphoric")
                  (:file "src/helper/memoize")
 
                  ;; data-structures
@@ -21,6 +22,7 @@
     :components ((:file "tests/utils")
 
                  ;; helper
+                 (:file "tests/helper/anaphoric")
                  (:file "tests/helper/memoize")
 
                  ;; data-structures

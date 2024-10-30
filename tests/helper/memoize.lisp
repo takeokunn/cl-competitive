@@ -11,7 +11,7 @@
 ;;                unit test                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(test memoize
+(test unit-memoize
   ;; test macroexpand
   (let* ((*GENSYM-COUNTER* 1)
          (test1 (macroexpand-1 '(defun-memo add (a b)
