@@ -3,10 +3,10 @@
    :cl-competitive/helper/memoize
         :cl-competitive/lib/data-structures/matrix)
   (:export #:trib
+           #:trib-tail-rec
            #:trib-memo
            #:trib-loop
-           #:trib-matrix
-           ))
+           #:trib-matrix))
 (in-package :cl-competitive/lib/algorithm/tribonacci)
 
 (defun trib (n)
@@ -15,6 +15,13 @@
         (t (+ (trib (- n 1))
               (trib (- n 2))
               (trib (- n 3))))))
+
+(defun trib-tail-rec (n)
+  (labels ((trib-iter (n a b c)
+             (if (< n 2)
+                 a
+                 (trib-iter (- n 1) b c (+ a b c)))))
+    (trib-iter n 0 0 1)))
 
 (defun-memo trib-memo (n)
   (cond ((< n 3) 0)

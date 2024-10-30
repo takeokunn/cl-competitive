@@ -11,7 +11,9 @@
 
                  ;; algorithm
                  (:file "src/lib/algorithm/fibonacci")
-                 (:file "src/lib/algorithm/tribonacci"))
+                 (:file "src/lib/algorithm/tribonacci")
+                 ;; (:file "src/lib/algorithm/union-find-tree")
+                 )
     :in-order-to ((test-op (test-op :cl-competitive/tests))))
 
 (asdf:defsystem :cl-competitive/tests
@@ -29,5 +31,7 @@
 
                  ;; algorithm
                  (:file "tests/lib/algorithm/fibonacci")
-                 (:file "tests/lib/algorithm/tribonacci"))
+                 (:file "tests/lib/algorithm/tribonacci")
+                 ;; (:file "tests/lib/algorithm/union-find-tree")
+                 )
     :perform (test-op (o c) (symbol-call :fiveam '#:run! :foobar)))

@@ -3,6 +3,7 @@
         :cl-competitive/helper/memoize
         :cl-competitive/lib/data-structures/matrix)
   (:export #:fib
+           #:fib-tail-rec
            #:fib-memo
            #:fib-loop
            #:fib-matrix))
@@ -13,6 +14,13 @@
       n
       (+ (fib (- n 1))
          (fib (- n 2)))))
+
+(defun fib-tail-rec (n)
+  (labels ((fib-iter (n a b)
+             (if (<= n 0)
+                 a
+                 (fib-iter (- n 1) b (+ a b)))))
+    (fib-iter n 0 1)))
 
 (defun-memo fib-memo (n)
   (if (<= n 1)
